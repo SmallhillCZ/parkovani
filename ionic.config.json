@@ -1,5 +1,7 @@
 {
   "name": "ParkovaniZTP",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

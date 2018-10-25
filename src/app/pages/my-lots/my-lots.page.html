@@ -1,0 +1,63 @@
+<ion-header>
+
+  <ion-toolbar>
+    <ion-title>Parkování ZTP</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="loadMyLots()">
+        <ion-icon slot="icon-only" name="refresh"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+  <div class="card" [class.open]="card.open" *ngFor="let card of cards" (click)="toggleCard(card)">
+
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col size="10">
+          <ion-card-title>{{myNames[card.lot.identifier] || card.lot.address.split(",")[0]}}</ion-card-title>
+          <ion-card-subtitle>{{card.lot.address}}</ion-card-subtitle>
+        </ion-col>
+        <ion-col size="2">
+          <div class="count" [class.full]="!card.lot.freeSpots" [class.semifull]="card.lot.freeSpots / card.lot.totalSpaces < 0.5">
+            <strong>{{card.lot.freeSpots}}</strong><sub>/{{card.lot.totalSpaces}}</sub>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div class="details">
+      <ion-grid no-padding>
+        <ion-row>
+          <ion-col>
+            <ion-button color="danger" (click)="removeMyLot(card.lot)">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col text-right>
+            <ion-button (click)="navigate($event,card.lot)">Navigovat</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <div *ngIf="stats[card.lot.identifier]" class="chart">
+        <div *ngFor="let hour of hours" class="hour" [style.width]="100/hours.length + '%'">
+          <div *ngIf="stats[card.lot.identifier][hour]" class="occupied" [class.interpolated]="stats[card.lot.identifier][hour].count === 0" [style.height]="stats[card.lot.identifier][hour].mean * 100 + '%'"></div>
+          <div class="label">{{hour}}</div>
+        </div>
+      </div>
+      <p class="timestamp" text-center>Poslední změna: {{card.lot.timestamp | date:"d. M. y H:m"}}</p>
+    </div>
+  </div>
+
+</ion-content>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="openAddLot($event)">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

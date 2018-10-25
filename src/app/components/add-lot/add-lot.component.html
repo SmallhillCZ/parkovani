@@ -1,0 +1,20 @@
+<ion-header>
+
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Přidat parkoviště</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let lot of lots" (click)="addLot(lot)">
+      <ion-label>{{lot.address}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
