@@ -4,7 +4,8 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 export const environment = {
   production: false,
-  api_root:"https://parkovani.smallhill.cz/api"
+  api_root:"https://parkovani.smallhill.cz/api",
+  geo_key: "AIzaSyCF-GtwXNaPxXDUDLXrSDQ1jmgG7gW46cE" // changed few letters to invalidate, provide your own
 };
 
 /*

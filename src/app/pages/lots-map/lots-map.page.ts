@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Environment, GoogleMaps, GoogleMap, MarkerOptions } from "@ionic-native/google-maps";
 import { Platform } from '@ionic/angular';
 import { DataService } from '../../services/data.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-lots-map',
@@ -26,10 +27,10 @@ export class LotsMapPage implements OnInit {
 
     Environment.setEnv({
       // api key for server
-      'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyCF-GtwXNaPxXDUDLXrSDQ1jmgG7gW46cE',
+      'API_KEY_FOR_BROWSER_RELEASE': environment.geo_key,
 
       // api key for local development
-      'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyCF-HtwXNaPxXDUDLXrSDQ1jmgG7gW46cE'
+      'API_KEY_FOR_BROWSER_DEBUG': environment.geo_key
     });
 
     this.map = GoogleMaps.create('map_canvas', {
