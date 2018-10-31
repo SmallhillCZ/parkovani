@@ -7,13 +7,15 @@ import { Storage } from '@ionic/storage';
 
 import { Lot } from "app/schema/lot";
 
+import { environment } from "../../environments/environment";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  api_root:string = "http://parkovani.smallhill.cz";
+  api_root:string = environment.api_root;
 
   constructor(private http:HttpClient, private storage:Storage) { }
 

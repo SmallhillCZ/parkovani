@@ -1,9 +1,14 @@
 <ion-header>
 
   <ion-toolbar>
-    <ion-title>Parkování ZTP</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Moje parkoviště</ion-title>
 
     <ion-buttons slot="end">
+
       <ion-button (click)="loadMyLots()">
         <ion-icon slot="icon-only" name="refresh"></ion-icon>
       </ion-button>
@@ -46,7 +51,8 @@
 
       <div *ngIf="stats[card.lot.identifier]" class="chart">
         <div *ngFor="let hour of hours" class="hour" [style.width]="100/hours.length + '%'">
-          <div *ngIf="stats[card.lot.identifier][hour]" class="occupied" [class.interpolated]="stats[card.lot.identifier][hour].count === 0" [style.height]="stats[card.lot.identifier][hour].mean * 100 + '%'"></div>
+          <div *ngIf="stats[card.lot.identifier][hour]" class="occupied" [class.interpolated]="stats[card.lot.identifier][hour].count === 0"
+            [style.height]="stats[card.lot.identifier][hour].mean * 100 + '%'"></div>
           <div class="label">{{hour}}</div>
         </div>
       </div>
@@ -54,10 +60,11 @@
     </div>
   </div>
 
+  <div *ngIf="!cards.length"><p>Zatím zde nemáte žádné parkoviště. Přidejte je pomocí tlačítka plus vpravo dole.</p></div>
 </ion-content>
 
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button (click)="openAddLot($event)">
+  <ion-fab-button (click)="openAddLot()">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>
