@@ -74,6 +74,7 @@ export class LotsMapPage implements OnInit {
 
         snippet: "Volná místa: " + lot.freeSpots + " z " + lot.totalSpaces
       }
+      
       this.map.addMarker(markerOptions);
     });
 
